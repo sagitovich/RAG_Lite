@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .result {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Поиск текста</h1>
+        <form method="post">
+            <input type="text" name="query" placeholder="Введите текст для поиска" value="{{ query }}" style="width: 100%; padding: 10px;" required>
+            <button type="submit" style="width: 100%; padding: 10px; margin-top: 10px;">Найти</button>
+        </form>
+        {% if results %}
+        <div class="results">
+            <h2>Результаты:</h2>
+            {% for result in results %}
+            <div class="result">
+                <p><strong>Текст:</strong> {{ result.text }}</p>
+                <p><strong>Релевантность:</strong> {{ '%.4f'|format(result.score) }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
